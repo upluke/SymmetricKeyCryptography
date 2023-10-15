@@ -1,7 +1,4 @@
 from Crypto.Cipher import AES
-from Crypto.Util.Padding import pad
-from Crypto.Util.Padding import unpad
-import binascii
 import os
 from Crypto import __version__
 
@@ -40,9 +37,6 @@ class TaskOne:
 
         return list_of_ciphers
 
-    def cbc_decrypt():
-        return
-
     # reference:
     # def encrypt_one(self, plain_block, key):
     #     return bytearray(
@@ -69,6 +63,7 @@ class TaskOne:
             block = bytes(x ^ y for x, y in zip(block, iv))
             cipher = AES.new(key, AES.MODE_ECB)
             encrypted_block = cipher.encrypt(block)
+            list_of_ciphers.append(encrypted_block)
             iv = encrypted_block
         return list_of_ciphers
 
@@ -104,45 +99,47 @@ class TaskOne:
         with open("cbc_encrypted_mustang.bmp", "wb") as file:
             file.write(cbc_encrypted_bmp_data)
 
-    # -------------------------------------------- demo
-    # def cbc_demo(self):
-    #     print("Crypto library version:", __version__)
-    #     with open("mustang.bmp", "rb") as file:
-    #         binary_data = file.read()
-    #     key = binascii.unhexlify("1F61ECB5ED5D6BAF8D7A7068B28DCC8E")
-    #     IV = os.urandom(16)
 
-    #     encryptor = AES.new(key, AES.MODE_CBC, IV=IV)
+# -------------------------------------------- demo
+# def cbc_demo(self):
+#     print("Crypto library version:", __version__)
+#     with open("mustang.bmp", "rb") as file:
+#         binary_data = file.read()
+#     key = binascii.unhexlify("1F61ECB5ED5D6BAF8D7A7068B28DCC8E")
+#     IV = os.urandom(16)
 
-    #     # pad
-    #     padded_data = pad(binary_data, AES.block_size)
-    #     ciphertext = encryptor.encrypt(padded_data)
+#     encryptor = AES.new(key, AES.MODE_CBC, IV=IV)
 
-    #     # print("123", binascii.hexlify(ciphertext).upper())
-    #     with open("encrypted_mustang.bmp", "wb") as file:
-    #         file.write(ciphertext)
+#     # pad
+#     padded_data = pad(binary_data, AES.block_size)
+#     ciphertext = encryptor.encrypt(padded_data)
 
-    #     self.cbc_demo_decryption("encrypted_mustang.bmp", key, IV)
+#     # print("123", binascii.hexlify(ciphertext).upper())
+#     with open("encrypted_mustang.bmp", "wb") as file:
+#         file.write(ciphertext)
 
-    # def cbc_demo_decryption(self, file_pah, key, IV):
-    #     with open(file_pah, "rb") as file:
-    #         encrypted_data = file.read()
+#     self.cbc_demo_decryption("encrypted_mustang.bmp", key, IV)
 
-    #     decryptor = AES.new(key, AES.MODE_CBC, IV=IV)
-    #     decrypted_data = decryptor.decrypt(encrypted_data)
-    #     # unpad
-    #     decrypted_data = unpad(decrypted_data, AES.block_size)
+# def cbc_demo_decryption(self, file_pah, key, IV):
+#     with open(file_pah, "rb") as file:
+#         encrypted_data = file.read()
 
-    #     with open("mustang.bmp", "rb") as file:
-    #         original_data = file.read()
+#     decryptor = AES.new(key, AES.MODE_CBC, IV=IV)
+#     decrypted_data = decryptor.decrypt(encrypted_data)
+#     # unpad
+#     decrypted_data = unpad(decrypted_data, AES.block_size)
 
-    #     if decrypted_data == original_data:
-    #         print("successful")
-    #     else:
-    #         print("nah")
+#     with open("mustang.bmp", "rb") as file:
+#         original_data = file.read()
 
-    # def print_value(self):
-    #     print(self.value)
+#     if decrypted_data == original_data:
+#         print("successful")
+#     else:
+#         print("nah")
+
+
+def print_value(self):
+    print(self.value)
 
 
 if __name__ == "__main__":
