@@ -93,7 +93,7 @@ class TaskTwo:
             0x3B,
         ]  # text -> hex
 
-        og_url_str = [
+        og_url_str = [  # serdata%3DYo       // str after 24 chars
             0x73,
             0x65,
             0x72,
